@@ -1,0 +1,29 @@
+#!/usr/local/bin/bash/
+dotfiles_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+declare -A link_map
+declare -A prefix_map
+
+. $dotfiles_dir/configs/symlink
+# sourced config:
+#   link_map=assoc array
+#   prefix_map=assoc array
+
+function link_files() {
+  local from=$1
+  local to=$2
+  local prefix=$3
+  echo "Linking '$from' in '$to':"
+  for file in $(find $dotfiles_dir/$from -depth 1 -type f)
+  do
+    local filename=$(basename "$file")
+    echo -e "\t$file => $to/$prefix${filename%.*}"
+    ln -is $file $to/$prefix${filename%.*}
+  done
+}
+
+for i in "${!link_map[@]}"
+do
+  link_files $i ${link_map[$i]} ${prefix_map[$i]}
+done
+
+unset link_files

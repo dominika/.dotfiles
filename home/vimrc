@@ -1,0 +1,260 @@
+set encoding=utf-8
+filetype off
+
+" whitespaces
+"set listchars=trail:•,nbsp:¬,tab:‹‹,precedes:«,extends:»
+"set list
+
+set rtp+=~/.vim/bundle/vundle/ 
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
+Bundle 'bling/vim-airline'
+Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'tpope/vim-fugitive'
+Bundle 'gregsexton/gitv'
+Bundle 'SirVer/ultisnips'
+Bundle 'scrooloose/syntastic'
+Bundle 'sjl/gundo.vim'
+Bundle 'taglist.vim'
+Bundle 'hexHighlight.vim'
+Bundle 'claco/jasmine.vim'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'dominika/vim-ext'
+Bundle 'dominika/vim-todos'
+Bundle 'tpope/vim-haml'
+Bundle 'greyblake/vim-preview'
+Bundle 'tpope/vim-rails'
+Bundle 'reload.vim'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'mamut/vim-css-color'
+Bundle 'git://github.com/danchoi/ri.vim.git'
+Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
+Bundle 'git://github.com/vim-scripts/ZoomWin'
+Bundle 'git://github.com/Townk/vim-autoclose.git'
+Bundle 'https://github.com/Valloric/YouCompleteMe.git'
+Bundle 'majutsushi/tagbar'
+Bundle 'mhinz/vim-signify'
+"Bundle 'git://github.com/terryma/vim-multiple-cursors'
+"Bundle 'git://github.com/terryma/vim-instant-markdown'
+"Bundle 'git://github.com/terryma/vim-smooth-scroll'
+"vim-rspec
+"ack.vim
+"vim-bufonly
+
+"noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 2, 2)<CR>
+"noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 2, 4)<CR>
+filetype plugin on
+syntax on
+set background=dark
+colorscheme vimbrant
+"highlight ColorColumn ctermbg=7
+"highlight ColorColumn guibg=Gray
+
+let g:ctrlp_custom_ignore = '.git$\|tmp/\|public/\|.sw[ompn]$\|.DS_STORE$\|bin/\|tags$'
+
+set rnu			"line numbers
+set nuw=5   "line number columns
+set sm			"show match
+set ai			"auto-indent
+set sw=2		"shift width
+set ts=2 		"tabstop
+"set guifont=Consolas
+set guifont=Inconsolata-dz_for_Powerline:h12
+set et        "expandtab, tabs=spaces
+set hls       "hlsearch
+set is        "incsearch
+"set cul       "cursorline
+set ignorecase
+set smartcase
+set magic
+set noerrorbells
+set novisualbell
+set linebreak
+set wrap
+set ruler
+set nolazyredraw
+
+set hidden
+
+"set grepprg=ack
+"set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+
+"au BufRead,BufNewFile *.scss set filetype=sass
+au BufRead,BufNewFile *.hamlc set filetype=haml
+
+set fillchars=diff:⣿
+
+"set undodir=~/.vim/tmp/undo/
+set backupdir=~/.vim/tmp/backup/
+set directory=~/.vim/tmp/swap/
+set nobackup
+
+"mappings
+nnoremap <Leader>d :NERDTreeToggle
+nnoremap <Leader>g :Gstatus5j
+nnoremap <Leader>w :Gwrite
+nnoremap <Leader>r :Gread
+nnoremap <Leader>u :GundoToggle
+let g:gundo_right=1
+
+"let g:reload_on_write = 0
+map <Leader>t :TlistToggle
+map <Leader>yf :s/false/true/
+map <Leader>yt :s/true/false/
+" turn off search highlighting
+nnoremap  :set invhlsearch
+
+"map <Leader>aj :exe 'split '.echo substitute(expand('%'),'coffeescripts','javascripts/compiled',"")
+map <Leader>gn h
+set pastetoggle=<F2>
+
+let g:turbux_spec_options="-f p -f h -o ~/ng/spec/webhr/{output_filename}.htm "
+"let g:turbux_spec_options="-f p -f h -o ~/ng/spec/webhr/{output_filename}.htm ; open ~/ng/spec/webhr/{output_filename}.htm"
+let g:no_turbux_mappings=""
+nmap <leader>r <Plug>SendTestToTmux
+nmap <leader>R <Plug>SendFocusedTestToTmux
+nmap <Leader>m :Rmodel 
+nmap <Leader>c :Rcontroller 
+nmap <Leader>v :Rview 
+
+nmap <Leader>D :%d
+nmap <Leader>Y :%y
+
+nmap <Leader>N ?defw*zz
+
+inoremap jk <Esc>
+
+cnorea w!! w !sudo tee % > /dev/null
+"map <D-B> :ls:b<Space>
+
+"folding?
+"matchit.vim?
+"mksession
+"smartindent?
+"spell?
+for mapmode in ["n", "x", "o"]
+    exe mapmode . "noremap <expr> <Leader>0 LineNumbers()"
+endfor
+
+function! LineNumbers()
+  if exists('+relativenumber')
+    exe "setlocal" &l:rnu ? "nu" :  "rnu"
+  else
+    setl nu!
+  endif
+endfunction
+
+"edit vimrc
+map <leader>e :tabe! ~/.vimrc
+map <leader>ee :tabe! ~/.gvimrc
+map <leader>b :tabe! ~/.bashrc
+autocmd! bufwritepost .vimrc source ~/.vimrc "reload vimrc
+autocmd! bufwritepost .gvimrc source ~/.gvimrc "reload vimrc
+
+set completeopt=menuone,preview,longest
+
+"set viminfo+=!
+set viminfo='100,<50,s10,h,:0,n~/.vim/.viminfo
+set wildmenu
+set wildmode=list:full
+set wildignore+=.git
+set wildignore+=*.sw?
+set wildignore+=DS_STORE
+
+au FocusLost * :silent! wall
+au VimResized * :wincmd =
+
+set noshowmode
+set laststatus=2
+
+"set t_Co=256
+let g:airline_powerline_fonts=1
+let g:airline_mode_map = {
+    \ '__' : '-',
+    \ 'n'  : 'N',
+    \ 'i'  : 'I',
+    \ 'R'  : 'R',
+    \ 'c'  : 'C',
+    \ 'v'  : 'V',
+    \ 'V'  : 'Vl',
+    \ '' : 'Vb',
+    \ 's'  : 'S',
+    \ 'S'  : 'S',
+    \ '' : 'S',
+    \ }
+
+" todos
+nnoremap <leader>p :call GetTodo()
+function! GetTodo()
+  exec "tabnew ~/aktualne/".fnamemodify(getcwd(),':t').".todo"
+endfunction
+
+nnoremap <Leader>h :s/:\([^ ]*\)\(\s*\)=>/\1:/g
+
+" ExT
+" {{{
+"
+function! My_undercursor_ack(...)
+  let pattern = expand("<cword>")
+  ExTRun "ack '".pattern."'",{'highlight':pattern, 'hidelist':1, 'extension_filter':1}
+endfunction
+
+function! My_ack(...)
+  let pattern = input("pattern: ")
+  "let type = input("type: \", \"", \"customlist,CompleteAckExtensions")
+  "let type = type == \"" ? \"" : \"--".type 
+  ExTRun "ack '".pattern."'",{'highlight':pattern, 'hidelist':1}
+endfunction
+nnoremap <silent> <Leader>A :call My_ack()
+nnoremap <silent> <Leader>a :call My_undercursor_ack()
+
+function! CompleteAckExtensions(A,L,P)
+  return ["ruby","coffee","haml","yml"]
+endfunction
+
+function! My_rspec()
+  let path = input("path: ")
+  let path = path == "" ? "spec" : path
+  let opts = input("opts: ")
+  let opts = opts == "" ? "-f d" : opts
+  ExTRun "bundle exec rspec ".opts." ".path,{'exclusive':1, 'autowatch': 1}
+endfunction
+function! My_rspec2()
+  let path = expand('%')
+  let opts = "-f d"
+  ExTRun "bundle exec rspec ".opts." ".path,{'exclusive':1, 'autowatch': 1}
+endfunction
+nnoremap <Leader>r :call My_rspec()
+nnoremap <Leader>R :call My_rspec2()
+"}}}
+
+"nnoremap <D-k> gt
+"nnoremap <D-j> gT
+nnoremap j :tabprevious
+nnoremap k :tabnext
+nnoremap Q :q
+nnoremap <Leader>E :ExTToggle
+let ruby_space_errors=1
+let g:tex_flavor='latex'
+nnoremap ; :
+
+nnoremap <Leader>s :w
+
+"nnoremap <Leader>o :ZoomWin
+let g:ycm_collect_identifiers_from_tags_files=0
+"let g:UltiSnipsSnippetDirctories=['UltiSnips', 'snippets']
+let g:UltiSnipsExpandTrigger="b"
+let g:UltiSnipsJumpForwardTrigger="b"
+let g:UltiSnipsJumpBackwardTrigger="m"
+
+if exists("$MANPAGER")
+  let $MANPAGER = ""
+endif
+if exists("$PAGER")
+  let $PAGER = ""
+endif

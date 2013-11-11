@@ -1,0 +1,31 @@
+$if Bash
+  Space: magic-space
+$endif
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+"\e[C": forward-char
+"\e[D": backward-char
+
+"\C-h": menu-complete
+"\C-j": menu-complete-backward
+
+#"\C-d": unix-line-discard # already on C-u DUH!
+"\ez": "cd -\C-Ml\C-M"
+"\ex": "cd ..\C-M"
+#set editing-mode vi
+#$if mode=vi
+#set keymap vi-command
+#"gg": end-of-history
+#"k": history-search-backward
+#"j": history-search-forward
+#"\e[Z": menu-complete
+#set keymap vi-insert
+#"\C-x\C-r": re-read-init-file
+#$endif
+
+set completion-ignore-case on
+set mark-modified-lines on
+set show-all-if-ambiguous on
+#set visible-stats on

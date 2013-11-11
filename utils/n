@@ -1,0 +1,73 @@
+#!/usr/local/bin/bash/
+# for iterm2 coloured tabs
+#
+# usage:
+#   n domain [ user ]
+#   n a.whole.domain.name [ user ]
+#
+#   n user.as.part.of.a.domain
+#
+
+dotfiles_dir=${DOT_FILES:?Please export \$DOT_FILES variable in your bashrc}
+. $DOT_FILES/configs/n
+# sourced config:
+#   aliases=("f first_alias" "s second_alias" ... )
+#   domain=''
+#   default_user=''
+#   ssh_opts=''
+
+server_name=${1}
+split_domain=(${1//./ })
+if [[ ${split_domain[2]} != '' ]]; then
+  domain=''
+fi
+if [[ $# -eq 2 ]]; then
+  user=${2}
+elif [[ $# -eq 1 ]]; then
+  user=${split_domain[0]}
+fi
+
+for e in "${aliases[@]}"
+do read short full <<<"$e"
+  if [[ $user == $short ]]; then
+    user=$full
+  fi
+  if [[ ${split_domain[0]} == $short ]]; then
+    server_name=$full.${split_domain[1]}
+  fi
+done
+destination=$user@$server_name$domain
+
+if [[ $user =~ $default_user ]]; then
+  #color=(102 204 0) # green
+  color=(102 174 238) # lightblue
+elif [[ (${split_domain[1]} = 's') ||  (${split_domain[0]} = 's') ]]; then
+  #color=(255 255 0) # yellow
+  color=(114 238 102) # lightgreen
+elif [[ ${split_domain[1]} = 'p' ]]; then
+  #color=(255 0 0)   # red
+  color=(238 102 102)   # red
+else
+  color=(255 128 0) # orange
+fi
+
+set_tab_title(){
+  echo -ne "\033];$1\007"
+}
+
+set_tab_color(){
+  if [[ -z "$1" ]]; then
+    echo -ne "\033]6;1;bg;*;default\a"
+  else
+    echo -ne "\033]6;1;bg;red;brightness;$1\a \033]6;1;bg;green;brightness;$2\a \033]6;1;bg;blue;brightness;$3\a"
+  fi
+}
+
+set_tab_title $destination
+set_tab_color ${color[0]} ${color[1]} ${color[2]}
+
+ssh_cmd="${ssh_opts} ${destination}"
+$ssh_cmd
+
+set_tab_title `whoami`
+set_tab_color

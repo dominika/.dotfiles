@@ -1,0 +1,139 @@
+export MANPAGER='col -bx | vim -c ":set ft=man nonu nolist" -R -'
+export LANG=en_US.UTF-8
+export LS_OPTIONS='--color=auto'
+alias ls='ls $LS_OPTIONS -hF'
+alias ll='ls $LS_OPTIONS -lhF'
+alias l='ls $LS_OPTIONS -lAhF'
+# aliases
+alias q=exit
+alias v="mvim"
+#alias l="ls -laGFT"
+#alias lh="ls -lahGF"
+#alias a2up="rvm 1.9.2; powder down; sudo apachectl start"
+#alias a2down="rvm 1.9.2; powder up; sudo apachectl stop"
+alias rake="bundle exec rake"
+alias b="bundle exec"
+alias ks="rake konacha:serve"
+
+alias gs="git status"
+alias gc="git checkout"
+alias gp="git pull"
+alias gd="git diff"
+alias gi="git add -i"
+alias gsl="git stash list"
+alias gst="git stash"
+alias gsp="git stash pop"
+alias gsa="git stash apply"
+alias gsc="git stash clear"
+
+alias log="tail -f log/development.log"
+alias r="rails"
+alias res="touch tmp/restart.txt"
+
+# n
+alias nsd="n s d"
+function ns() {
+  n s $1
+}
+
+# prompt stuff
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -n 's/^\* \(.*\)/\1/p'
+}
+function parse_git_dirty {
+  [[ -n `git status --porcelain 2> /dev/null` ]] && echo '#'
+}
+
+preformatted_pivotal_id() {
+  if [ -s "tmp/.pivotal_story_id" ]; then head -1 tmp/.pivotal_story_id; fi;
+}
+
+RED="\033[0;31m"
+YELLOW="\033[1;33m"
+GREEN="\033[0;32m"
+WHITE="\033[0;0m"
+LBLUE="\033[1;34m"
+DGREY="\033[1;30m"
+#DGREY="\033[0;34m"
+LGREY="\033[0;37m"
+#LGREY="\033[0;36m"
+LGREEN="\033[1;32m"
+#LGREEN="\033[0;33m"
+
+function ps1_right() {
+  echo -e "$RED`parse_git_dirty` $LGREY`parse_git_branch`$DGREY $RUBY_VERSION \033[0m"
+}
+
+function ps1_left() {
+  echo -e "$DGREY\h $LGREY\u $LGREEN\w $LBLUE`preformatted_pivotal_id``if [ \$? -ne 0 ]; then echo $RED; else echo $WHITE; fi`\n\\$ "
+}
+
+function ps1() {
+    PS1=$(printf "%*s\r%s" "$(($(tput cols)+25))" "$(ps1_right)" "$(ps1_left)")
+}
+#export PS1="$DGREY\h $LGREY\u $LGREEN\w $LBLUE`if [ \$? -ne 0 ]; then echo $RED; else echo $WHITE; fi`\n\\$"
+#PROMPT_COMMAND=ps1
+PROMPT_COMMAND="$PROMPT_COMMAND; ps1"
+
+mvs() { # mvs [smestr] co gdzie
+  if [[ "$1" =~ [0-9]+ ]]; then
+    to=~/Documents/Studia/$1/$3
+    mv $2 $to
+  else
+    to=~/Documents/Studia/5/$2
+    mv $1 $to
+  fi
+}
+
+#complex aliases
+gac() {
+  git add .
+  git commit -a -m"$1"
+  git pull
+}
+
+swap_mac() {
+  sudo ifconfig en0 ether `tail -n 1 ~/Documents/other/mac`
+}
+
+gopen() {
+  vi `bundle show $1`
+}
+
+function dut() { 
+  du -ch "$@" | grep total;
+}
+
+function dus() { 
+  du -ah "$@" | sort -rn | more;
+}
+
+function dus1() { 
+  du -hd 1 "$@" | sort -rn | more;
+}
+
+function dux() {
+  du -hx "$@" | sort -hr | head
+}
+
+function set_tab_title() {
+  echo -ne "\033]; $@ `whoami`\007"
+}
+
+#exports
+export PATH="/usr/local/bin:$PATH"
+export PYTHONPATH="/usr/local/lib/python2.7/site-packages:/Library/Python/2.7/site-packages/clips:$PYTHONPATH"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+
+export EDITOR='vim'
+export GEM_EDITOR='vim'
+export DOT_FILES=~/.dotfiles
+. $DOT_FILES/configs/private
+
+export LESS_TERMCAP_mb=$'\E[01;31m' # begin blinking
+export LESS_TERMCAP_md=$'\E[01;38;5;74m' # begin bold
+export LESS_TERMCAP_me=$'\E[0m' # end mode
+export LESS_TERMCAP_se=$'\E[0m' # end standout-mode
+export LESS_TERMCAP_so=$'\E[38;5;246m' # begin standout-mode - info box export LESS_TERMCAP_ue=$'\E[0m' # end underline
+export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
+eval `dircolors ~/.dir_colors`
