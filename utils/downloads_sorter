@@ -1,0 +1,20 @@
+#!/usr/local/bin/bash/
+declare -A groups
+
+dotfiles_dir=${DOT_FILES:?Please export \$DOT_FILES variable in your bashrc}
+. $DOT_FILES/configs/downloads_sorter
+# sourced config:
+#   destination=path
+#   groups=assoc array e.g.([archives]="zip,gz,7z,tar,rar" [documents]="doc,txt")
+
+cd $destination
+echo `pwd`
+for group in ${!groups[@]}
+do
+  what='*.{'${groups[$group]}'}'
+  with='s/(.*)/'$group'\/$1/'
+  mkdir -p $group
+  cmd="rename '$with' $what"
+  echo $group
+  eval $cmd
+done
