@@ -258,3 +258,7 @@ endif
 if exists("$PAGER")
   let $PAGER = ""
 endif
+if $VIM_CRONTAB == "true"
+  set nobackup
+  set nowritebackup
+endif
