@@ -14,6 +14,7 @@ $endif
 #"\C-d": unix-line-discard # already on C-u DUH!
 "\ez": "cd -\C-Ml\C-M"
 "\ex": "cd ..\C-M"
+"\eh": "cd ~\C-M"
 #set editing-mode vi
 #$if mode=vi
 #set keymap vi-command
