@@ -129,7 +129,7 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export EDITOR='vim'
 export GEM_EDITOR='vim'
 export DOT_FILES=~/.dotfiles
-. $DOT_FILES/configs/private
+. "$DOT_FILES/configs/private"
 
 export LESS_TERMCAP_mb=$'\E[01;31m' # begin blinking
 export LESS_TERMCAP_md=$'\E[01;38;5;74m' # begin bold
