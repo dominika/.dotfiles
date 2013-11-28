@@ -15,30 +15,28 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-fugitive'
-Bundle 'gregsexton/gitv'
-Bundle 'SirVer/ultisnips'
 Bundle 'scrooloose/syntastic'
 Bundle 'sjl/gundo.vim'
-Bundle 'taglist.vim'
 Bundle 'hexHighlight.vim'
-Bundle 'claco/jasmine.vim'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'dominika/vim-ext'
 Bundle 'dominika/vim-todos'
 Bundle 'tpope/vim-haml'
-Bundle 'greyblake/vim-preview'
-Bundle 'tpope/vim-rails'
-Bundle 'reload.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
-Bundle 'mamut/vim-css-color'
-Bundle 'git://github.com/danchoi/ri.vim.git'
-Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
-Bundle 'git://github.com/vim-scripts/ZoomWin'
 Bundle 'git://github.com/Townk/vim-autoclose.git'
 Bundle 'https://github.com/Valloric/YouCompleteMe.git'
-Bundle 'majutsushi/tagbar'
-Bundle 'mhinz/vim-signify'
+"Bundle 'tpope/vim-rails'
+"Bundle 'greyblake/vim-preview'
+"Bundle 'mamut/vim-css-color' ....... -.-
+
+filetype plugin on
+syntax on
+set background=dark
+colorscheme vimbrant
+
+"Bundle 'majutsushi/tagbar'
+"Bundle 'mhinz/vim-signify'
 "Bundle 'git://github.com/terryma/vim-multiple-cursors'
 "Bundle 'git://github.com/terryma/vim-instant-markdown'
 "Bundle 'git://github.com/terryma/vim-smooth-scroll'
@@ -46,24 +44,14 @@ Bundle 'mhinz/vim-signify'
 "ack.vim
 "vim-bufonly
 
-"noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 2, 2)<CR>
-"noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 2, 4)<CR>
-filetype plugin on
-syntax on
-set background=dark
-colorscheme vimbrant
-"highlight ColorColumn ctermbg=7
-"highlight ColorColumn guibg=Gray
-
 let g:ctrlp_custom_ignore = '.git$\|tmp/\|public/\|.sw[ompn]$\|.DS_STORE$\|bin/\|tags$'
 
-set rnu			"line numbers
+set rnu                        "line numbers
 set nuw=5   "line number columns
-set sm			"show match
-set ai			"auto-indent
-set sw=2		"shift width
-set ts=2 		"tabstop
-"set guifont=Consolas
+set sm                 "show match
+set ai                 "auto-indent
+set sw=2               "shift width
+set ts=2               "tabstop
 set guifont=Inconsolata-dz_for_Powerline:h12
 set et        "expandtab, tabs=spaces
 set hls       "hlsearch
@@ -107,30 +95,24 @@ map <Leader>t :TlistToggle
 map <Leader>yf :s/false/true/
 map <Leader>yt :s/true/false/
 " turn off search highlighting
-nnoremap  :set invhlsearch
+nnoremap :set invhlsearch
 
 "map <Leader>aj :exe 'split '.echo substitute(expand('%'),'coffeescripts','javascripts/compiled',"")
-map <Leader>gn h
+map <Leader>gn ^Wh
 set pastetoggle=<F2>
 
-let g:turbux_spec_options="-f p -f h -o ~/ng/spec/webhr/{output_filename}.htm "
-"let g:turbux_spec_options="-f p -f h -o ~/ng/spec/webhr/{output_filename}.htm ; open ~/ng/spec/webhr/{output_filename}.htm"
-let g:no_turbux_mappings=""
-nmap <leader>r <Plug>SendTestToTmux
-nmap <leader>R <Plug>SendFocusedTestToTmux
-nmap <Leader>m :Rmodel 
-nmap <Leader>c :Rcontroller 
-nmap <Leader>v :Rview 
+nmap <Leader>m :Rmodel
+nmap <Leader>c :Rcontroller
+nmap <Leader>v :Rview
 
 nmap <Leader>D :%d
 nmap <Leader>Y :%y
 
-nmap <Leader>N ?defw*zz
+nmap <Leader>N ?def^Mw*zz
 
 inoremap jk <Esc>
 
 cnorea w!! w !sudo tee % > /dev/null
-"map <D-B> :ls:b<Space>
 
 "folding?
 "matchit.vim?
@@ -154,7 +136,8 @@ map <leader>e :tabe! ~/.vimrc
 map <leader>ee :tabe! ~/.gvimrc
 map <leader>b :tabe! ~/.bashrc
 autocmd! bufwritepost .vimrc source ~/.vimrc "reload vimrc
-autocmd! bufwritepost .gvimrc source ~/.gvimrc "reload vimrc
+" only if visual
+"autocmd! bufwritepost .gvimrc source ~/.gvimrc "reload vimrc
 
 set completeopt=menuone,preview,longest
 
@@ -170,53 +153,10 @@ au FocusLost * :silent! wall
 au VimResized * :wincmd =
 
 set noshowmode
-set laststatus=2
-
-"set t_Co=256
-let g:airline_powerline_fonts=1
-let g:airline_mode_map = {
-    \ '__' : '-',
-    \ 'n'  : 'N',
-    \ 'i'  : 'I',
-    \ 'R'  : 'R',
-    \ 'c'  : 'C',
-    \ 'v'  : 'V',
-    \ 'V'  : 'Vl',
-    \ '' : 'Vb',
-    \ 's'  : 'S',
-    \ 'S'  : 'S',
-    \ '' : 'S',
-    \ }
-
-" todos
-nnoremap <leader>p :call GetTodo()
-function! GetTodo()
-  exec "tabnew ~/aktualne/".fnamemodify(getcwd(),':t').".todo"
-endfunction
-
-nnoremap <Leader>h :s/:\([^ ]*\)\(\s*\)=>/\1:/g
 
 " ExT
 " {{{
 "
-function! My_undercursor_ack(...)
-  let pattern = expand("<cword>")
-  ExTRun "ack '".pattern."'",{'highlight':pattern, 'hidelist':1, 'extension_filter':1}
-endfunction
-
-function! My_ack(...)
-  let pattern = input("pattern: ")
-  "let type = input("type: \", \"", \"customlist,CompleteAckExtensions")
-  "let type = type == \"" ? \"" : \"--".type 
-  ExTRun "ack '".pattern."'",{'highlight':pattern, 'hidelist':1}
-endfunction
-nnoremap <silent> <Leader>A :call My_ack()
-nnoremap <silent> <Leader>a :call My_undercursor_ack()
-
-function! CompleteAckExtensions(A,L,P)
-  return ["ruby","coffee","haml","yml"]
-endfunction
-
 function! My_rspec()
   let path = input("path: ")
   let path = path == "" ? "spec" : path
@@ -229,14 +169,56 @@ function! My_rspec2()
   let opts = "-f d"
   ExTRun "bundle exec rspec ".opts." ".path,{'exclusive':1, 'autowatch': 1}
 endfunction
-nnoremap <Leader>r :call My_rspec()
-nnoremap <Leader>R :call My_rspec2()
-"}}}
+"nnoremap <Leader>r :call My_rspec()
+"nnoremap <Leader>R :call My_rspec2()
+
+function! My_undercursor_ack(...)
+  let pattern = expand("<cword>")
+  ExTRun "ack '".pattern."'",{'highlight':pattern, 'hidelist':1, 'extension_filter':1}
+endfunction
+
+function! My_ack(...)
+  let pattern = input("pattern: ")
+  "let type = input("type: \", \"", \"customlist,CompleteAckExtensions")
+  "let type = type == \"" ? \"" : \"--".type
+  ExTRun "ack '".pattern."'",{'highlight':pattern, 'hidelist':1}
+endfunction
+nnoremap <silent> <Leader>A :call My_ack()
+nnoremap <silent> <Leader>a :call My_undercursor_ack()
+
+function! CompleteAckExtensions(A,L,P)
+  return ["ruby","coffee","haml","yml"]
+endfunction
+set laststatus=2
+
+"set t_Co=256
+let g:airline_powerline_fonts=1
+let g:airline_mode_map = {
+    \ '__' : '-',
+    \ 'n'  : 'N',
+    \ 'i'  : 'I',
+    \ 'R'  : 'R',
+    \ 'c'  : 'C',
+    \ 'v'  : 'V',
+    \ 'V'  : 'Vl',
+    \ '^V' : 'Vb',
+    \ 's'  : 'S',
+    \ 'S'  : 'S',
+    \ '^S' : 'S',
+    \ }
+
+" todos
+nnoremap <leader>p :call GetTodo()
+function! GetTodo()
+  exec "tabnew ~/aktualne/".fnamemodify(getcwd(),':t').".todo"
+endfunction
+
+nnoremap <Leader>h :s/:\([^ ]*\)\(\s*\)=>/\1:/g
 
 "nnoremap <D-k> gt
 "nnoremap <D-j> gT
-nnoremap j :tabprevious
-nnoremap k :tabnext
+nnoremap k :tabprevious
+nnoremap j :tabnext
 nnoremap Q :q
 nnoremap <Leader>E :ExTToggle
 let ruby_space_errors=1
@@ -248,9 +230,9 @@ nnoremap <Leader>s :w
 "nnoremap <Leader>o :ZoomWin
 let g:ycm_collect_identifiers_from_tags_files=0
 "let g:UltiSnipsSnippetDirctories=['UltiSnips', 'snippets']
-let g:UltiSnipsExpandTrigger="b"
-let g:UltiSnipsJumpForwardTrigger="b"
-let g:UltiSnipsJumpBackwardTrigger="m"
+let g:UltiSnipsExpandTrigger=""
+let g:UltiSnipsJumpForwardTrigger=""
+let g:UltiSnipsJumpBackwardTrigger=""
 
 if exists("$MANPAGER")
   let $MANPAGER = ""
