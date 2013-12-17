@@ -7,7 +7,7 @@ alias ll='ls $LS_OPTIONS -lhF'
 alias l='ls $LS_OPTIONS -lAhF'
 # aliases
 alias q=exit
-alias v="mvim"
+alias v="vim"
 #alias l="ls -laGFT"
 #alias lh="ls -lahGF"
 #alias a2up="rvm 1.9.2; powder down; sudo apachectl start"
@@ -73,8 +73,8 @@ function ps1() {
     PS1=$(printf "%*s\r%s" "$(($(tput cols)+25))" "$(ps1_right)" "$(ps1_left)")
 }
 #export PS1="$DGREY\h $LGREY\u $LGREEN\w $LBLUE`if [ \$? -ne 0 ]; then echo $RED; else echo $WHITE; fi`\n\\$"
-#PROMPT_COMMAND=ps1
-PROMPT_COMMAND="$PROMPT_COMMAND; ps1"
+PROMPT_COMMAND=ps1
+#PROMPT_COMMAND="$PROMPT_COMMAND; ps1"
 
 mvs() { # mvs [smestr] co gdzie
   if [[ "$1" =~ [0-9]+ ]]; then
