@@ -17,7 +17,7 @@ function link_files() {
   do
     local filename=$(basename "$file")
     echo -e "\t$file => $to/$prefix${filename%.*}"
-    ln -s "$file" "$to/$prefix${filename%.*}"
+    ln -Fs "$file" "$to/$prefix${filename%.*}"
   done < <(find "$dotfiles_dir/$from" -depth 1 -type f -print0)
 }
 
