@@ -7,7 +7,7 @@ alias ll='ls $LS_OPTIONS -lhF'
 alias l='ls $LS_OPTIONS -lAhF'
 # aliases
 alias q=exit
-alias v="vim"
+alias v='set_tab_title_without_user $(basename $(pwd)) && vim'
 #alias l="ls -laGFT"
 #alias lh="ls -lahGF"
 #alias a2up="rvm 1.9.2; powder down; sudo apachectl start"
@@ -30,6 +30,13 @@ alias gsc="git stash clear"
 alias log="tail -f log/development.log"
 alias r="rails"
 alias res="touch tmp/restart.txt"
+
+alias sshvm="ssh root@debianvm -o PreferredAuthentications=password"
+
+alias start_debianvm="VBoxManage startvm debian"
+alias stop_debianvm="VBoxManage controlvm debian poweroff"
+alias restore_clean_debianvm="VBoxManage snapshot debian restore decb69e2-3ddf-4e6c-aafe-6eb54649fce9"
+alias restore_prepared_debianvm="VBoxManage snapshot debian restore 80d387c4-b186-453e-87b8-da4365344b20"
 
 # n
 alias nsd="n s d"
@@ -121,6 +128,10 @@ function set_tab_title() {
   echo -ne "\033]; $@ `whoami`\007"
 }
 
+function set_tab_title_without_user() {
+  echo -ne "\033]; $@ \007"
+}
+
 #exports
 export PATH="/usr/local/bin:$PATH"
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages:/Library/Python/2.7/site-packages/clips:$PYTHONPATH"
@@ -138,3 +149,6 @@ export LESS_TERMCAP_se=$'\E[0m' # end standout-mode
 export LESS_TERMCAP_so=$'\E[38;5;246m' # begin standout-mode - info box export LESS_TERMCAP_ue=$'\E[0m' # end underline
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 eval `dircolors ~/.dir_colors`
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
