@@ -31,11 +31,13 @@ alias log="tail -f log/development.log"
 alias r="rails"
 alias res="touch tmp/restart.txt"
 
+function vm_on {
+  VBoxManage startvm ${1:-'debian'}
+}
 
-alias start_debianvm="VBoxManage startvm debian"
-alias stop_debianvm="VBoxManage controlvm debian poweroff"
-alias restore_clean_debianvm="VBoxManage snapshot debian restore decb69e2-3ddf-4e6c-aafe-6eb54649fce9"
-alias restore_prepared_debianvm="VBoxManage snapshot debian restore 80d387c4-b186-453e-87b8-da4365344b20"
+function vm_off {
+  VBoxManage controlvm ${1:-'debian'} poweroff
+}
 
 # n
 alias nsd="n s d"
