@@ -11,3 +11,5 @@ gem_tags
 .powrc
 mockups
 secret_keys
+debianvm*
+_ignored
