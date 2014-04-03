@@ -31,7 +31,6 @@ alias log="tail -f log/development.log"
 alias r="rails"
 alias res="touch tmp/restart.txt"
 
-alias sshvm="ssh root@debianvm -o PreferredAuthentications=password"
 
 alias start_debianvm="VBoxManage startvm debian"
 alias stop_debianvm="VBoxManage controlvm debian poweroff"
