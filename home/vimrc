@@ -5,30 +5,30 @@ filetype off
 "set listchars=trail:•,nbsp:¬,tab:‹‹,precedes:«,extends:»
 "set list
 
-set rtp+=~/.vim/bundle/vundle/ 
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-Bundle 'bling/vim-airline'
-Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/syntastic'
-Bundle 'sjl/gundo.vim'
-Bundle 'hexHighlight.vim'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'dominika/vim-ext'
-Bundle 'dominika/vim-todos'
-Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'git://github.com/Townk/vim-autoclose.git'
-Bundle 'https://github.com/Valloric/YouCompleteMe.git'
-"Bundle 'tpope/vim-rails'
-"Bundle 'greyblake/vim-preview'
-"Bundle 'mamut/vim-css-color' ....... -.-
+Plugin 'bling/vim-airline'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/syntastic'
+Plugin 'sjl/gundo.vim'
+Plugin 'hexHighlight.vim'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'dominika/vim-ext'
+Plugin 'dominika/vim-todos'
+Plugin 'tpope/vim-haml'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'git://github.com/Townk/vim-autoclose.git'
+Plugin 'https://github.com/Valloric/YouCompleteMe.git'
+"Plugin 'tpope/vim-rails'
+"Plugin 'greyblake/vim-preview'
+"Plugin 'mamut/vim-css-color' ....... -.-
 
 filetype plugin on
 syntax on
