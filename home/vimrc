@@ -30,6 +30,7 @@ Plugin 'https://github.com/Valloric/YouCompleteMe.git'
 "Plugin 'greyblake/vim-preview'
 "Plugin 'mamut/vim-css-color' ....... -.-
 
+filetype indent on
 filetype plugin on
 syntax on
 set background=dark
@@ -84,6 +85,7 @@ set nobackup
 
 "mappings
 nnoremap <Leader>d :NERDTreeToggle
+let NERDTreeHijackNetrw=1
 nnoremap <Leader>g :Gstatus5j
 nnoremap <Leader>w :Gwrite
 nnoremap <Leader>r :Gread
@@ -244,3 +246,5 @@ if $VIM_CRONTAB == "true"
   set nobackup
   set nowritebackup
 endif
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
