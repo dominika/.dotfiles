@@ -1,6 +1,7 @@
 export MANPAGER='col -bx | vim -c ":set ft=man nonu nolist" -R -'
 export LANG=en_US.UTF-8
 export LS_OPTIONS='--color=auto'
+export RAILS_ENV=development
 alias crontab="VIM_CRONTAB=true crontab"
 alias ls='ls $LS_OPTIONS -hF'
 alias ll='ls $LS_OPTIONS -lhF'
