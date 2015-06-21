@@ -47,7 +47,7 @@ Plugin 'jgdavey/tslime.vim'
 filetype indent on
 filetype plugin on
 syntax on
-set background=dark
+set background=light
 colorscheme vimbrant
 
 "vim-bufonly
@@ -59,7 +59,6 @@ set sm                 "show match
 set ai                 "auto-indent
 set sw=2               "shift width
 set ts=2               "tabstop
-set guifont=Inconsolata-dz_for_Powerline:h12
 set et        "expandtab, tabs=spaces
 set hls       "hlsearch
 set is        "incsearch
