@@ -16,7 +16,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/syntastic'
-Plugin 'sjl/gundo.vim'
+let g:syntastic_ruby_checkers = ["mri", "rubocop"]
 Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-surround'
