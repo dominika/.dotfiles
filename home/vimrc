@@ -33,13 +33,6 @@ syntax on
 set background=dark
 colorscheme vimbrant
 
-"Bundle 'majutsushi/tagbar'
-"Bundle 'mhinz/vim-signify'
-"Bundle 'git://github.com/terryma/vim-multiple-cursors'
-"Bundle 'git://github.com/terryma/vim-instant-markdown'
-"Bundle 'git://github.com/terryma/vim-smooth-scroll'
-"vim-rspec
-"ack.vim
 "vim-bufonly
 
 let g:ctrlp_custom_ignore = '.git$\|tmp/\|public/\|.sw[ompn]$\|.DS_STORE$\|bin/\|tags$'
