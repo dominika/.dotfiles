@@ -249,4 +249,10 @@ if $VIM_CRONTAB == "true"
 endif
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
+
+let g:rspec_command = 'call Send_to_Tmux("RAILS_ENV=test bundle exec rspec {spec}\n")'
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
 nnoremap  :FZF<CR>
