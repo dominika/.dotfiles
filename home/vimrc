@@ -187,8 +187,7 @@ function! My_ack(...)
   "let type = type == \"" ? \"" : \"--".type
   ExTRun "ack '".pattern."'",{'highlight':pattern, 'hidelist':1}
 endfunction
-nnoremap <silent> <Leader>A :call My_ack()
-nnoremap <silent> <Leader>a :call My_undercursor_ack()
+nnoremap <silent> <Leader>A :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 function! CompleteAckExtensions(A,L,P)
   return ["ruby","coffee","haml","yml"]
