@@ -233,9 +233,9 @@ nnoremap <Leader>s :w
 "nnoremap <Leader>o :ZoomWin
 let g:ycm_collect_identifiers_from_tags_files=0
 "let g:UltiSnipsSnippetDirctories=['UltiSnips', 'snippets']
-let g:UltiSnipsExpandTrigger=""
-let g:UltiSnipsJumpForwardTrigger=""
-let g:UltiSnipsJumpBackwardTrigger=""
+let g:UltiSnipsExpandTrigger=""
+let g:UltiSnipsJumpForwardTrigger=""
+let g:UltiSnipsJumpBackwardTrigger=""
 
 if exists("$MANPAGER")
   let $MANPAGER = ""
