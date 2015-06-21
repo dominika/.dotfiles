@@ -12,7 +12,6 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 
 Plugin 'bling/vim-airline'
-Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-fugitive'
