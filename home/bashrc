@@ -33,6 +33,8 @@ alias log="tail -f log/development.log"
 alias r="rails"
 alias res="touch tmp/restart.txt"
 
+alias ta="tmux attach -t"
+
 function vm_on {
   VBoxManage startvm ${1:-'debian'}
 }
