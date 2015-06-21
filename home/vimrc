@@ -75,10 +75,7 @@ set nolazyredraw
 
 set hidden
 
-"set grepprg=ack
-"set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
-"au BufRead,BufNewFile *.scss set filetype=sass
 au BufRead,BufNewFile *.hamlc set filetype=haml
 
 set fillchars=diff:⣿
