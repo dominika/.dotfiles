@@ -26,19 +26,20 @@ Plugin 'hexHighlight.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'git://github.com/Townk/vim-autoclose.git'
-Plugin 'https://github.com/Valloric/YouCompleteMe.git'
+
 " colorschemes
 Plugin 'croaky/vim-colors-github'
 "Plugin 'john2x/flatui.vim'
 "Plugin 'nelstrom/vim-mac-classic-theme'
 "Plugin 'baeuml/summerfruit256.vim'
+
+Plugin 'dominika/vim-todos'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'jgdavey/tslime.vim'
 "Plugin 'Valloric/YouCompleteMe'
-"Plugin 'Valloric/YouCompleteMe'
 "Plugin 'tpope/vim-rails'
-"Plugin 'tpope/vim-rails'
+
 "Plugin 'greyblake/vim-preview'
 "Bundle 'git://github.com/terryma/vim-instant-markdown'
 "Bundle 'majutsushi/tagbar'
