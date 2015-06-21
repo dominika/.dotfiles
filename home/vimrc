@@ -35,7 +35,6 @@ colorscheme vimbrant
 
 "vim-bufonly
 
-let g:ctrlp_custom_ignore = '.git$\|tmp/\|public/\|.sw[ompn]$\|.DS_STORE$\|bin/\|tags$'
 
 set rnu                        "line numbers
 set nuw=5   "line number columns
