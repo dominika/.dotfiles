@@ -237,6 +237,10 @@ let g:UltiSnipsExpandTrigger=""
 let g:UltiSnipsJumpForwardTrigger=""
 let g:UltiSnipsJumpBackwardTrigger=""
 
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+autocmd FileType man match NONE
+
 if exists("$MANPAGER")
   let $MANPAGER = ""
 endif
@@ -247,8 +251,6 @@ if $VIM_CRONTAB == "true"
   set nobackup
   set nowritebackup
 endif
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
 
 let g:rspec_command = 'call Send_to_Tmux("RAILS_ENV=test bundle exec rspec {spec}\n")'
 map <Leader>t :call RunCurrentSpecFile()<CR>
