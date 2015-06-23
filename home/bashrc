@@ -143,6 +143,15 @@ function set_tab_title_without_user() {
   echo -ne "\033]; $@ \007"
 }
 
+fstash_show_patch() {
+  local out stash_id
+  while out=$(git stash list | fzf --no-sort); do
+    stash_id=$(echo $out | awk -F: '{print $1}')
+    [ -z "$stash_id" ] && continue
+    git stash show --color=always -p $stash_id | less -R
+  done
+}
+
 fshow() {
   local out shas sha q k
   while out=$(
