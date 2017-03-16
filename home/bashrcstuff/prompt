@@ -1,0 +1,35 @@
+RED="\033[0;31m"
+YELLOW="\033[1;33m"
+GREEN="\033[0;32m"
+WHITE="\033[0;0m"
+LBLUE="\033[1;34m"
+DGREY="\033[1;30m"
+#DGREY="\033[0;34m"
+LGREY="\033[0;37m"
+#LGREY="\033[0;36m"
+LGREEN="\033[1;32m"
+ORANGE="\033[0;33m"
+
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -n 's/^\* \(.*\)/\1/p'
+}
+
+function parse_git_dirty {
+  [[ -n `git status --porcelain 2> /dev/null` ]] && echo "$RED"
+}
+
+function ps1_rb_and_branch() {
+  echo -e "$LGREEN`parse_git_dirty` `parse_git_branch`$DGREY $RUBY_VERSION \033[0m"
+}
+function ps1_status_color() {
+  echo -e "`if [ \$? -ne 0 ]; then echo $RED; else echo $YELLOW; fi`"
+}
+
+function ps1_usr_and_pwd() {
+  echo -e "$DGREY\h$LGREY\u $ORANGE\w"
+}
+
+function ps1() {
+    PS1=$(printf "%s%s" "$(ps1_usr_and_pwd)" "$(ps1_rb_and_branch)\n$WHITE$ ")
+}
+PROMPT_COMMAND=ps1

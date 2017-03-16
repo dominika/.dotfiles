@@ -1,0 +1,27 @@
+alias crontab="VIM_CRONTAB=true crontab"
+
+alias b="bundle exec"
+alias c="bundle exec rails c"
+alias gs="git status"
+alias gp="git pull"
+alias gd="git diff"
+alias gdc="git diff --cached"
+alias gi="git add -i"
+alias gip="git add -p"
+alias ga="git add"
+alias gcm="git checkout master"
+alias gmm="git merge master"
+alias gst="git stash"
+__git_complete gst _git_stash
+alias l='ls $LS_OPTIONS -lAhF'
+alias ls='ls $LS_OPTIONS -hF'
+alias ll='ls $LS_OPTIONS -lhF'
+alias mdb="bundle exec rake db:migrate && RAILS_ENV=test bundle exec rake db:migrate"
+alias q=exit
+alias r="bundle exec rails"
+alias s="bundle exec rails s"
+alias sp="RAILS_ENV=test bundle exec rspec"
+alias rake="bundle exec rake"
+alias routes="bundle exec rake routes"
+alias ta="tmux attach -t"
+alias v=vim
