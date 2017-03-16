@@ -32,7 +32,7 @@ if [[ (-e $gemtags_path) && ($2 != 'only_project') ]]; then
   append=-a
 fi
 
-cp $gemtags_path $tags_path
+#cp $gemtags_path $tags_path
 echo Generating $tags_path
 $ctags -R --fields=+l $append \
 --exclude=public/ --exclude=tmp/ --exclude=.git/ \
