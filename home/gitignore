@@ -13,3 +13,4 @@ mockups
 secret_keys
 debianvm*
 _ignored
+.DS_Store
