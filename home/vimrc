@@ -1,4 +1,5 @@
 set encoding=utf-8
+set nocompatible
 filetype off
 
 " whitespaces
@@ -7,9 +8,9 @@ filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=/usr/local/opt/fzf
-call vundle#rc()
+call vundle#begin()
 
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
@@ -17,18 +18,29 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/syntastic'
 let g:syntastic_ruby_checkers = ["mri", "rubocop"]
-Plugin 'rking/ag.vim'
+let g:syntastic_coffee_checkers = ["coffee", "coffeelint"]
+let g:syntastic_javascript_checkers = ["jslint", "jshint"]
+let g:syntastic_html_checkers = ["jshint"]
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_aggregate_errors = 1
+
+Plugin 'kagux/vim-rubocop-autocorrect'
+Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'sjl/gundo.vim'
 Plugin 'hexHighlight.vim'
-Plugin 'SirVer/ultisnips'
+"Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'git://github.com/Townk/vim-autoclose.git'
 
 " colorschemes
-Plugin 'croaky/vim-colors-github'
+Plugin 'dracula/vim'
+"Plugin 'croaky/vim-colors-github'
 "Plugin 'john2x/flatui.vim'
 "Plugin 'nelstrom/vim-mac-classic-theme'
 "Plugin 'baeuml/summerfruit256.vim'
@@ -36,19 +48,24 @@ Plugin 'croaky/vim-colors-github'
 Plugin 'dominika/vim-todos'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'thoughtbot/vim-rspec'
-Plugin 'jgdavey/tslime.vim'
+"Plugin 'jgdavey/tslime.vim'
+Plugin 'benmills/vimux'
+Plugin 'pgr0ss/vimux-ruby-test'
+Plugin 'wfleming/vim-codeclimate'
+Plugin 'christoomey/vim-tmux-navigator'
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'tpope/vim-rails'
 
 "Plugin 'greyblake/vim-preview'
 "Bundle 'git://github.com/terryma/vim-instant-markdown'
 "Bundle 'majutsushi/tagbar'
-
+call vundle#end()
 filetype indent on
 filetype plugin on
 syntax on
-set background=light
-colorscheme vimbrant
+
+set background=dark
+colorscheme dracula
 
 "vim-bufonly
 
@@ -112,7 +129,7 @@ nmap <Leader>v :Rview
 nmap <Leader>D :%d
 nmap <Leader>Y :%y
 
-nmap <Leader>N ?def^Mw*zz
+nmap <Leader>N ?defw*zz
 
 inoremap jk <Esc>
 
@@ -178,8 +195,9 @@ endfunction
 
 function! My_undercursor_ack(...)
   let pattern = expand("<cword>")
-  ExTRun "ack '".pattern."'",{'highlight':pattern, 'hidelist':1, 'extension_filter':1}
+  " ExTRun \"ack '".pattern."'",{'highlight':pattern, 'hidelist':1, 'extension_filter':1}
 endfunction
+nnoremap <silent> <Leader>A :Ag <C-R><C-W><CR>
 
 function! My_ack(...)
   let pattern = input("pattern: ")
@@ -187,7 +205,6 @@ function! My_ack(...)
   "let type = type == \"" ? \"" : \"--".type
   ExTRun "ack '".pattern."'",{'highlight':pattern, 'hidelist':1}
 endfunction
-nnoremap <silent> <Leader>A :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 function! CompleteAckExtensions(A,L,P)
   return ["ruby","coffee","haml","yml"]
@@ -232,13 +249,12 @@ nnoremap <Leader>s :w
 
 "nnoremap <Leader>o :ZoomWin
 let g:ycm_collect_identifiers_from_tags_files=0
-"let g:UltiSnipsSnippetDirctories=['UltiSnips', 'snippets']
-let g:UltiSnipsExpandTrigger=""
-let g:UltiSnipsJumpForwardTrigger=""
-let g:UltiSnipsJumpBackwardTrigger=""
+"let g:UltiSnipsExpandTrigger=""
+"let g:UltiSnipsJumpForwardTrigger=""
+"let g:UltiSnipsJumpBackwardTrigger=""
 
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+match OverLength /\%101v.\+/
 autocmd FileType man match NONE
 
 if exists("$MANPAGER")
@@ -252,11 +268,20 @@ if $VIM_CRONTAB == "true"
   set nowritebackup
 endif
 
-let g:rspec_command = 'call Send_to_Tmux("RAILS_ENV=test bundle exec rspec {spec}\n")'
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+"let g:rspec_command = 'call Send_to_Tmux("RAILS_ENV=test bundle exec rspec -f d {spec}\n")'
+let g:vimux_ruby_cmd_unit_test = "RAILS_ENV=test bundle exec ruby"
+map <Leader>t :RunRubyFocusedContext
+"map <Leader>t :call RunCurrentSpecFile()
+"map <Leader>s :call RunNearestSpec()<CR>
+"map <Leader>l :call RunLastSpec()<CR>
+"map <Leader>a :call RunAllSpecs()<CR>
+"map gb :Gblame<CR>
 nnoremap  :FZF<CR>
 
 autocmd BufReadPost fugitive://* set bufhidden=delete
+highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+"highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+"highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+"highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+nnoremap <Leader>A :Ag 
+let g:ackprg = 'ag --vimgrep'
