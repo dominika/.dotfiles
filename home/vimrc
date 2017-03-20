@@ -6,17 +6,14 @@ filetype off
 "set listchars=trail:•,nbsp:¬,tab:‹‹,precedes:«,extends:»
 "set list
 
-set rtp+=~/.vim/bundle/Vundle.vim
-set rtp+=/usr/local/opt/fzf
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'bling/vim-airline'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/syntastic'
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'bling/vim-airline'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/syntastic'
 let g:syntastic_ruby_checkers = ["mri", "rubocop"]
 let g:syntastic_coffee_checkers = ["coffee", "coffeelint"]
 let g:syntastic_javascript_checkers = ["jslint", "jshint"]
@@ -27,39 +24,39 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_aggregate_errors = 1
 
-Plugin 'kagux/vim-rubocop-autocorrect'
-Plugin 'mileszs/ack.vim'
-Plugin 'tpope/vim-haml'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'sjl/gundo.vim'
-Plugin 'hexHighlight.vim'
-"Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'git://github.com/Townk/vim-autoclose.git'
+Plug 'kagux/vim-rubocop-autocorrect'
+Plug 'mileszs/ack.vim'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'sjl/gundo.vim'
+Plug 'hexHighlight.vim'
+"Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'git://github.com/Townk/vim-autoclose.git'
 
 " colorschemes
-Plugin 'dracula/vim'
-"Plugin 'croaky/vim-colors-github'
-"Plugin 'john2x/flatui.vim'
-"Plugin 'nelstrom/vim-mac-classic-theme'
-"Plugin 'baeuml/summerfruit256.vim'
+Plug 'dracula/vim'
+"Plug 'croaky/vim-colors-github'
+"Plug 'john2x/flatui.vim'
+"Plug 'nelstrom/vim-mac-classic-theme'
+"Plug 'baeuml/summerfruit256.vim'
 
-Plugin 'dominika/vim-todos'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'thoughtbot/vim-rspec'
-"Plugin 'jgdavey/tslime.vim'
-Plugin 'benmills/vimux'
-Plugin 'pgr0ss/vimux-ruby-test'
-Plugin 'wfleming/vim-codeclimate'
-Plugin 'christoomey/vim-tmux-navigator'
-"Plugin 'Valloric/YouCompleteMe'
-"Plugin 'tpope/vim-rails'
+Plug 'dominika/vim-todos'
+Plug 'kchmck/vim-coffee-script'
+Plug 'thoughtbot/vim-rspec'
+"Plug 'jgdavey/tslime.vim'
+Plug 'benmills/vimux'
+Plug 'pgr0ss/vimux-ruby-test'
+Plug 'wfleming/vim-codeclimate'
+Plug 'christoomey/vim-tmux-navigator'
+"Plug 'Valloric/YouCompleteMe'
+"Plug 'tpope/vim-rails'
 
-"Plugin 'greyblake/vim-preview'
+"Plug 'greyblake/vim-preview'
 "Bundle 'git://github.com/terryma/vim-instant-markdown'
 "Bundle 'majutsushi/tagbar'
-call vundle#end()
+call plug#end()
 filetype indent on
 filetype plugin on
 syntax on
@@ -276,7 +273,6 @@ map <Leader>t :RunRubyFocusedContext
 "map <Leader>l :call RunLastSpec()<CR>
 "map <Leader>a :call RunAllSpecs()<CR>
 "map gb :Gblame<CR>
-nnoremap  :FZF<CR>
 
 autocmd BufReadPost fugitive://* set bufhidden=delete
 highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
@@ -284,4 +280,5 @@ highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Re
 "highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 "highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
 nnoremap <Leader>A :Ag 
+nnoremap  :Files
 let g:ackprg = 'ag --vimgrep'
