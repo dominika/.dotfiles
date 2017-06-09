@@ -2,10 +2,11 @@ source "$DOT_FILES/configs/private"
 
 export MANPAGER='col -bx | vim -c ":set ft=man nonu nolist" -R -'
 export LANG=en_US.UTF-8
+export LC_ALL=$LANG
 export LS_OPTIONS='--color=auto'
 export EDITOR='vim'
 export GEM_EDITOR='vim'
-export CC=/usr/bin/gcc-4.2
+#export CC=/usr/bin/gcc-4.2
 
 export OPSCODE_USER=maui
 

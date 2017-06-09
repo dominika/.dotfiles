@@ -1,12 +1,20 @@
 function gc() {
   local pivotal_id
-  pivotal_id=$(git branch --no-color 2> /dev/null | sed -n 's/^\* .*\/\([0-9]*\)\(.*\)/#\1/p')
+  pivotal_id=$(git branch --no-color 2> /dev/null | sed -n 's/^\* .*\/[pt]*\([0-9]*\)\(.*\)/#\1/p')
   git commit -m"$1
 [$pivotal_id]"
 }
 
+function gpo() {
+  git pull origin `parse_git_branch`;
+}
+
+function gpuo() {
+  git push origin `parse_git_branch`;
+}
+
 gemopen() {
-  vi `bundle show $1`
+  cd `bundle show $1` && v
 }
 
 function dut() { 
@@ -77,4 +85,3 @@ fshow_patch() {
     git stash show --color=always -p $stash_id | less -R
   done
 }
-
