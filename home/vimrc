@@ -9,7 +9,7 @@ filetype off
 call plug#begin('~/.vim/plugged')
 
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
@@ -31,7 +31,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'sjl/gundo.vim'
 Plug 'hexHighlight.vim'
-"Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'git://github.com/Townk/vim-autoclose.git'
 
@@ -42,14 +42,16 @@ Plug 'dracula/vim'
 "Plug 'nelstrom/vim-mac-classic-theme'
 "Plug 'baeuml/summerfruit256.vim'
 
-Plug 'dominika/vim-todos'
+"Plug 'dominika/vim-todos'
 Plug 'kchmck/vim-coffee-script'
-Plug 'thoughtbot/vim-rspec'
+"Plug 'thoughtbot/vim-rspec'
 "Plug 'jgdavey/tslime.vim'
 Plug 'benmills/vimux'
-Plug 'pgr0ss/vimux-ruby-test'
-Plug 'wfleming/vim-codeclimate'
-Plug 'christoomey/vim-tmux-navigator'
+Plug 'ecomba/vim-ruby-refactoring'
+Plug 'tmhedberg/matchit'
+"Plug 'pgr0ss/vimux-ruby-test'
+"Plug 'wfleming/vim-codeclimate'
+"Plug 'christoomey/vim-tmux-navigator'
 "Plug 'Valloric/YouCompleteMe'
 "Plug 'tpope/vim-rails'
 
@@ -172,37 +174,6 @@ au VimResized * :wincmd =
 
 set noshowmode
 
-" ExT
-" {{{
-"
-function! My_rspec()
-  let path = input("path: ")
-  let path = path == "" ? "spec" : path
-  let opts = input("opts: ")
-  let opts = opts == "" ? "-f d" : opts
-  ExTRun "bundle exec rspec ".opts." ".path,{'exclusive':1, 'autowatch': 1}
-endfunction
-function! My_rspec2()
-  let path = expand('%')
-  let opts = "-f d"
-  ExTRun "bundle exec rspec ".opts." ".path,{'exclusive':1, 'autowatch': 1}
-endfunction
-"nnoremap <Leader>r :call My_rspec()
-"nnoremap <Leader>R :call My_rspec2()
-
-function! My_undercursor_ack(...)
-  let pattern = expand("<cword>")
-  " ExTRun \"ack '".pattern."'",{'highlight':pattern, 'hidelist':1, 'extension_filter':1}
-endfunction
-nnoremap <silent> <Leader>A :Ag <C-R><C-W><CR>
-
-function! My_ack(...)
-  let pattern = input("pattern: ")
-  "let type = input("type: \", \"", \"customlist,CompleteAckExtensions")
-  "let type = type == \"" ? \"" : \"--".type
-  ExTRun "ack '".pattern."'",{'highlight':pattern, 'hidelist':1}
-endfunction
-
 function! CompleteAckExtensions(A,L,P)
   return ["ruby","coffee","haml","yml"]
 endfunction
@@ -246,9 +217,9 @@ nnoremap <Leader>s :w
 
 "nnoremap <Leader>o :ZoomWin
 let g:ycm_collect_identifiers_from_tags_files=0
-"let g:UltiSnipsExpandTrigger=""
-"let g:UltiSnipsJumpForwardTrigger=""
-"let g:UltiSnipsJumpBackwardTrigger=""
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%101v.\+/
@@ -282,3 +253,7 @@ highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Re
 nnoremap <Leader>A :Ag 
 nnoremap  :Files
 let g:ackprg = 'ag --vimgrep'
+"map <C-j> <C-W>j
+"map <C-k> <C-W>k
+"map <C-h> <C-W>h
+"map <C-l> <C-W>l
