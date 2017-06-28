@@ -27,3 +27,5 @@ alias rake="bundle exec rake"
 alias routes="bundle exec rake routes"
 alias ta="tmux attach -t"
 alias v=vim
+
+alias alias_functions="declare -F | grep -v 'declare -f _' | cut -d ' ' -f 3"
