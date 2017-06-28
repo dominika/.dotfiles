@@ -1,7 +1,8 @@
 alias crontab="VIM_CRONTAB=true crontab"
 
 alias b="bundle exec"
-alias c="bundle exec rails c"
+alias c="bundle exec rails c 2>/dev/null"
+alias ap="git pull && bi && mdb"
 alias gs="git status"
 alias gp="git pull"
 alias gd="git diff"
