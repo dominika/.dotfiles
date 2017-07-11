@@ -15,34 +15,23 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 
 Plug 'mileszs/ack.vim'
-Plug 'tpope/vim-haml'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'sjl/gundo.vim'
-Plug 'hexHighlight.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'git://github.com/Townk/vim-autoclose.git'
 
 " colorschemes
 Plug 'dracula/vim'
-"Plug 'croaky/vim-colors-github'
-"Plug 'john2x/flatui.vim'
-"Plug 'nelstrom/vim-mac-classic-theme'
-"Plug 'baeuml/summerfruit256.vim'
 
-"Plug 'dominika/vim-todos'
 Plug 'kchmck/vim-coffee-script'
-"Plug 'thoughtbot/vim-rspec'
-"Plug 'jgdavey/tslime.vim'
-Plug 'benmills/vimux'
+"Plug 'benmills/vimux'
+
 Plug 'ecomba/vim-ruby-refactoring'
 Plug 'tmhedberg/matchit'
-"Plug 'pgr0ss/vimux-ruby-test'
-"Plug 'wfleming/vim-codeclimate'
 "Plug 'christoomey/vim-tmux-navigator'
-"Plug 'Valloric/YouCompleteMe'
-"Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rails'
 
 "Plug 'greyblake/vim-preview'
 "Bundle 'git://github.com/terryma/vim-instant-markdown'
@@ -56,8 +45,6 @@ set background=dark
 colorscheme dracula
 
 "vim-bufonly
-
-
 set rnu                        "line numbers
 set nuw=5   "line number columns
 set sm                 "show match
@@ -106,7 +93,6 @@ map <Leader>yt :s/true/false/
 " turn off search highlighting
 nnoremap :set invhlsearch
 
-"map <Leader>aj :exe 'split '.echo substitute(expand('%'),'coffeescripts','javascripts/compiled',"")
 map <Leader>gn ^Wh
 set pastetoggle=<F2>
 
@@ -124,21 +110,9 @@ inoremap jk <Esc>
 cnorea w!! w !sudo tee % > /dev/null
 
 "folding?
-"matchit.vim?
 "mksession
 "smartindent?
 "spell?
-for mapmode in ["n", "x", "o"]
-    exe mapmode . "noremap <expr> <Leader>0 LineNumbers()"
-endfor
-
-function! LineNumbers()
-  if exists('+relativenumber')
-    exe "setlocal" &l:rnu ? "nu" :  "rnu"
-  else
-    setl nu!
-  endif
-endfunction
 
 "edit vimrc
 map <leader>e :tabe! ~/.vimrc
@@ -163,9 +137,6 @@ au VimResized * :wincmd =
 
 set noshowmode
 
-function! CompleteAckExtensions(A,L,P)
-  return ["ruby","coffee","haml","yml"]
-endfunction
 set laststatus=2
 
 "set t_Co=256
@@ -184,12 +155,6 @@ let g:airline_mode_map = {
     \ '^S' : 'S',
     \ }
 
-" todos
-nnoremap <leader>p :call GetTodo()
-function! GetTodo()
-  exec "tabnew ~/aktualne/".fnamemodify(getcwd(),':t').".todo"
-endfunction
-
 nnoremap <Leader>h :s/:\([^ ]*\)\(\s*\)=>/\1:/g
 
 "nnoremap <D-k> gt
@@ -197,7 +162,6 @@ nnoremap <Leader>h :s/:\([^ ]*\)\(\s*\)=>/\1:/g
 nnoremap k :tabprevious
 nnoremap j :tabnext
 nnoremap Q :q
-nnoremap <Leader>E :ExTToggle
 let ruby_space_errors=1
 let g:tex_flavor='latex'
 nnoremap ; :
@@ -205,7 +169,6 @@ nnoremap ; :
 nnoremap <Leader>s :w
 
 "nnoremap <Leader>o :ZoomWin
-let g:ycm_collect_identifiers_from_tags_files=0
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
@@ -224,15 +187,6 @@ if $VIM_CRONTAB == "true"
   set nobackup
   set nowritebackup
 endif
-
-"let g:rspec_command = 'call Send_to_Tmux("RAILS_ENV=test bundle exec rspec -f d {spec}\n")'
-let g:vimux_ruby_cmd_unit_test = "RAILS_ENV=test bundle exec ruby"
-map <Leader>t :RunRubyFocusedContext
-"map <Leader>t :call RunCurrentSpecFile()
-"map <Leader>s :call RunNearestSpec()<CR>
-"map <Leader>l :call RunLastSpec()<CR>
-"map <Leader>a :call RunAllSpecs()<CR>
-"map gb :Gblame<CR>
 
 autocmd BufReadPost fugitive://* set bufhidden=delete
 highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
