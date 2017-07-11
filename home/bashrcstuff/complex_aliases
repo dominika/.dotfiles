@@ -1,3 +1,7 @@
+function 2fafor() {
+  oathtool --totp -b $1 | pbcopy
+}
+
 function glp() {
   # or -S
   git log -p -G$1
