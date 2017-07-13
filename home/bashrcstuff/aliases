@@ -19,6 +19,8 @@ alias l='ls $LS_OPTIONS -lAhF'
 alias ls='ls $LS_OPTIONS -hF'
 alias ll='ls $LS_OPTIONS -lhF'
 alias mdb="bundle exec rake db:migrate && RAILS_ENV=test bundle exec rake db:migrate"
+alias pry="bundle exec pry-remote"
+alias byebug="byebug -R localhost:8989"
 alias q=exit
 alias r="bundle exec rails"
 alias s="bundle exec rails s"
