@@ -23,7 +23,7 @@ append=''
 
 if [[ $2 = 'with_gems' ]]; then
   echo Generating $gemtags_path
-  cd $project_path && $gem_paths | xargs $ctags --fields=+l -R -f $gemtags_path
+  cd $project_path && $gem_paths | xargs $ctags --fields=+l --languages=Ruby -R -f $gemtags_path
 fi
 
 if [[ (-e $gemtags_path) && ($2 != 'only_project') ]]; then
@@ -35,14 +35,8 @@ fi
 #cp $gemtags_path $tags_path
 echo Generating $tags_path
 $ctags -R --fields=+l $append \
---exclude=public/ --exclude=tmp/ --exclude=.git/ \
---langdef=coffee --langmap=coffee:.coffee \
---regex-coffee="/^class ([A-Za-z.]+)( extends [A-Za-z.]+)?$/\1/c,class/" \
---regex-coffee="/^[ \t]*@?([A-Za-z.]+):.*[-=]>.*$/\1/f,function/" \
---regex-coffee="/^[ \t]*([A-Za-z.]+)[ \t]+=.*[-=]>.*$/\1/f,function/" \
---regex-coffee="/^[ \t]*([A-Za-z.]+)[ \t]+=[^->\n]*$/\1/v,variable/" \
+--exclude=public/ --exclude=tmp/ --exclude=.git/ --exclude=vendor/ --exclude=log/ --exclude=bin/ \
+--exclude=app/asstets/stylesheets/ --exclude=app/asstets/fonts/ --exclude=app/asstets/images/ \
 -f $tags_path $project_path
-#regex-coffee="/(^|=[ \t])*class ([A-Za-z.]+)( extends [A-Za-z.]+)?$/\2/c,class/*/"
-#regex-coffee="/^[ \t]*@?([A-Za-z.]+):.*[-=]>.*$/\1/f,function/ */"
-#regex-coffee="/^[ \t]*([A-Za-z.]+)[ \t]+=.*[-=]>.*$/\1/f,function/*/"
-#regex-coffee="/^[ \t]*([A-Za-z.]+)[ \t]+=[^->\n]*$/\1/v,variable/*/"
+echo Generating coffeetags
+coffeetags -R -a -f tags

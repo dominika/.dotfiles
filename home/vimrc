@@ -35,7 +35,7 @@ Plug 'tpope/vim-rails'
 
 "Plug 'greyblake/vim-preview'
 "Bundle 'git://github.com/terryma/vim-instant-markdown'
-"Bundle 'majutsushi/tagbar'
+"Plug 'majutsushi/tagbar'
 call plug#end()
 filetype indent on
 filetype plugin on
