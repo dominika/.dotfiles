@@ -6,6 +6,14 @@ function use_original_gem {
   gsed -i "s/gem '$1', path: '..\/$1' \#/gem '$1',/g" Gemfile && bundle update $1
 }
 
+function install_ruby() {
+  brew upgrade ruby-build
+  ruby-build $1 /opt/rubies/ruby-$1
+  . ~/.bashrc
+  chruby $1
+  gem install bundler
+}
+
 function 2fafor() {
   oathtool --totp -b $1 | pbcopy
 }
