@@ -1,3 +1,11 @@
+function use_local_gem {
+  gsed -i "s/gem '$1',/gem '$1', path: '..\/$1' \#/g" Gemfile && bundle update $1
+}
+
+function use_original_gem {
+  gsed -i "s/gem '$1', path: '..\/$1' \#/gem '$1',/g" Gemfile && bundle update $1
+}
+
 function 2fafor() {
   oathtool --totp -b $1 | pbcopy
 }
