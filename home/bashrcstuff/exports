@@ -7,6 +7,7 @@ export LS_OPTIONS='--color=auto'
 export EDITOR='vim'
 export GEM_EDITOR='vim'
 #export CC=/usr/bin/gcc-4.2
+export TERM="xterm-256color"
 
 export OPSCODE_USER=maui
 

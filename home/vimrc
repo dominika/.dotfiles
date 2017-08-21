@@ -200,3 +200,8 @@ let g:ackprg = 'ag --vimgrep'
 "map <C-k> <C-W>k
 "map <C-h> <C-W>h
 "map <C-l> <C-W>l
+"
+set tags=tags,gem_tags
+if getcwd()=~'[admin|engine]'
+  set tags=tags,~/bgl/gaming_worker/tags,gem_tags
+endif
