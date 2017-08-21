@@ -30,7 +30,7 @@ Plug 'kchmck/vim-coffee-script'
 
 Plug 'ecomba/vim-ruby-refactoring'
 Plug 'tmhedberg/matchit'
-"Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-rails'
 
 "Plug 'greyblake/vim-preview'
@@ -205,3 +205,5 @@ set tags=tags,gem_tags
 if getcwd()=~'[admin|engine]'
   set tags=tags,~/bgl/gaming_worker/tags,gem_tags
 endif
+let g:tmux_navigator_disable_when_zoomed = 1
+let g:CoffeeAutoTagIncludeVars=1

@@ -32,4 +32,4 @@ $ctags -R --fields=+l $append \
 -f $project_tags_path $project_path
 
 echo Generating coffeetags
-coffeetags -R -a -f $project_tags_path
+coffeetags -R -a -f $project_tags_path --include-vars
