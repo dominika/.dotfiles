@@ -34,7 +34,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-rails'
 
 "Plug 'greyblake/vim-preview'
-"Bundle 'git://github.com/terryma/vim-instant-markdown'
+Plug 'terryma/vim-instant-markdown'
 "Plug 'majutsushi/tagbar'
 call plug#end()
 filetype indent on
@@ -207,3 +207,8 @@ if getcwd()=~'[admin|engine]'
 endif
 let g:tmux_navigator_disable_when_zoomed = 1
 let g:CoffeeAutoTagIncludeVars=1
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
