@@ -26,8 +26,10 @@ Plug 'git://github.com/Townk/vim-autoclose.git'
 Plug 'dracula/vim'
 
 Plug 'kchmck/vim-coffee-script'
-"Plug 'benmills/vimux'
+Plug 'benmills/vimux'
+Plug 'jgdavey/vim-turbux'
 
+Plug 'vim-ruby/vim-ruby'
 Plug 'ecomba/vim-ruby-refactoring'
 Plug 'tmhedberg/matchit'
 Plug 'christoomey/vim-tmux-navigator'
@@ -194,7 +196,7 @@ highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Re
 "highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 "highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
 nnoremap <Leader>A :Ag 
-nnoremap  :Files
+nnoremap  :GFiles
 let g:ackprg = 'ag --vimgrep'
 "map <C-j> <C-W>j
 "map <C-k> <C-W>k
