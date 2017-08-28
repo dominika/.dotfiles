@@ -205,8 +205,8 @@ let g:ackprg = 'ag --vimgrep'
 "map <C-l> <C-W>l
 "
 set tags=tags,gem_tags
-if getcwd()=~'[admin|engine]'
-  set tags=tags,~/bgl/gaming_worker/tags,gem_tags
+if getcwd()=~$DEP_PROJECT_REG
+  set tags=tags,$DEP_PROJECT/tags,gem_tags
 endif
 let g:tmux_navigator_disable_when_zoomed = 1
 let g:CoffeeAutoTagIncludeVars=1
