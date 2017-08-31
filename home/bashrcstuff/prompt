@@ -24,10 +24,18 @@ function ps1_status_color() {
 }
 
 function ps1_usr_and_pwd() {
-  echo -e "\[$DGREY\]\h\[$WHITE\]\u \[$YELLOW\]\w"
+  if [ "$TERM" = "xterm-256color" ] && [ -n "$TMUX" ]; then
+    echo -e "\[$YELLOW\]\w"
+  else
+    echo -e "\[$DGREY\]\h\[$WHITE\]\u \[$YELLOW\]\w"
+  fi
+}
+
+function ps1_color_tester() {
+  echo -e "$BLACK uga $RED uga $GREEN uga $YELLOW uga $BLUE uga $MAGENTA uga $CYAN uga $WHITE uga $DGREY uga"
 }
 
 function ps1() {
-    PS1=$(printf "%s%s" "$(ps1_usr_and_pwd)" "$(ps1_rb_and_branch)\n\[$WHITE\]$ ")
+  PS1=$(printf "%s%s" "$(ps1_usr_and_pwd)" "$(ps1_rb_and_branch)\n\[$WHITE\]$ ")
 }
 PROMPT_COMMAND=ps1
