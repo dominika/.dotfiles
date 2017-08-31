@@ -1,9 +1,10 @@
 function use_local_gem {
-  gsed -i "s/gem '$1',/gem '$1', path: '..\/$1' \#/g" Gemfile && bundle update $1
+  gsed -i "s/gem '$1',/gem '$1', path: '..\/$1' \#/g" Gemfile && bundle update $1 && generate_ctags $(basename $(pwd)) with_gems
+
 }
 
 function use_original_gem {
-  gsed -i "s/gem '$1', path: '..\/$1' \#/gem '$1',/g" Gemfile && bundle update $1
+  gsed -i "s/gem '$1', path: '..\/$1' \#/gem '$1',/g" Gemfile && bundle update $1 && generate_ctags $(basename $(pwd)) with_gems
 }
 
 function install_ruby() {
