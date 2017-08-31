@@ -38,6 +38,9 @@ Plug 'tpope/vim-rails'
 
 "Plug 'greyblake/vim-preview'
 Plug 'terryma/vim-instant-markdown'
+Plug 'lmeijvogel/vim-yaml-helper'
+Plug 'Yggdroot/indentLine'
+
 "Plug 'majutsushi/tagbar'
 call plug#end()
 filetype indent on
@@ -57,7 +60,7 @@ set ts=2               "tabstop
 set et        "expandtab, tabs=spaces
 set hls       "hlsearch
 set is        "incsearch
-"set cul       "cursorline
+set cul       "cursorline
 set ignorecase
 set smartcase
 set magic
@@ -98,6 +101,7 @@ nnoremap :set invhlsearch
 
 map <Leader>gn ^Wh
 set pastetoggle=<F2>
+nmap <F4> :set clipboard=unnamed
 
 nmap <Leader>m :Rmodel
 nmap <Leader>c :Rcontroller
@@ -119,8 +123,8 @@ cnorea w!! w !sudo tee % > /dev/null
 
 "edit vimrc
 map <leader>e :tabe! ~/.vimrc
-map <leader>ee :tabe! ~/.gvimrc
 map <leader>b :tabe! ~/.bashrc
+map <leader>t :tabe! ~/.tmux.conf
 autocmd! bufwritepost .vimrc source ~/.vimrc "reload vimrc
 " only if visual
 "autocmd! bufwritepost .gvimrc source ~/.gvimrc "reload vimrc
@@ -167,6 +171,7 @@ nnoremap j :tabnext
 nnoremap Q :q
 let ruby_space_errors=1
 let g:tex_flavor='latex'
+nnoremap § ;
 nnoremap ; :
 
 nnoremap <Leader>s :w
@@ -215,3 +220,6 @@ command! -bang -nargs=* Ag
   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                 <bang>0)
+nnoremap ,d obinding.pry_remote<ESC>
+nnoremap ,b oByebug.start_remote_debugging<ESC>
+let g:indentLine_setColors = 1
