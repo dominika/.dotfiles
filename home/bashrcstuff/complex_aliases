@@ -27,7 +27,7 @@ function glp() {
 function gc() {
   local pivotal_id
   pivotal_id=$(git branch --no-color 2> /dev/null | sed -n 's/^\* .*\/[pt]*\([0-9]*\)\(.*\)/#\1/p')
-  git commit -m"$1 [$pivotal_id]"
+  git commit -m"$1" -m"[$pivotal_id]"
 }
 
 function gpo() {
