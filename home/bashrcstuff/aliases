@@ -13,6 +13,7 @@ alias gap="git add -p"
 alias gl="git log"
 alias gcm="git checkout master"
 alias gmm="git merge master"
+alias gprune="git prune remote origin"
 alias gst="git stash"
 __git_complete gst _git_stash
 alias l='ls $LS_OPTIONS -lAhF'
