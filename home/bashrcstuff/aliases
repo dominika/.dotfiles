@@ -16,6 +16,7 @@ alias gmm="git merge master"
 alias gprune="git prune remote origin"
 alias gst="git stash"
 __git_complete gst _git_stash
+alias jb=jobs
 alias l='ls $LS_OPTIONS -lAhF'
 alias ls='ls $LS_OPTIONS -hF'
 alias ll='ls $LS_OPTIONS -lhF'
