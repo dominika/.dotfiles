@@ -32,6 +32,14 @@ function _update_ {
   #https://github.com/Homebrew/homebrew-bundle
 }
 
+function check_current {
+ git ls-files --modified --others --exclude-standard | grep '.rb' | xargs rubocop -R -f fu
+}
+
+function correct_current {
+ git ls-files --modified --others --exclude-standard | grep '.rb' | xargs rubocop -R -f fu --auto-correct
+}
+
 function use_local_gem {
   gsed -i "s/gem '$1',/gem '$1', path: '..\/$1' \#/g" Gemfile && bundle update $1 && generate_ctags $(basename $(pwd)) with_gems
 
