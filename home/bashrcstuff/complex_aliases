@@ -1,3 +1,18 @@
+function sp {
+  local notification_message
+  local spec_status
+
+  RAILS_ENV=test bundle exec rspec --fail-fast $1
+  spec_status=$?
+  if [ $spec_status -eq 0 ];then
+    notification_message="All passed"
+  else
+    notification_message="Some failed"
+  fi
+  echo $notification_message
+  osascript -e "display notification \"$notification_message\" with title \"Tests finished\""
+}
+
 function use_local_gem {
   gsed -i "s/gem '$1',/gem '$1', path: '..\/$1' \#/g" Gemfile && bundle update $1 && generate_ctags $(basename $(pwd)) with_gems
 

@@ -27,7 +27,6 @@ alias q=exit
 alias r="bundle exec rails"
 alias zs="RAILS_ENV= zeus s puma"
 alias s="bundle exec rails s puma"
-alias sp="RAILS_ENV=test bundle exec rspec --fail-fast"
 alias rake="bundle exec rake"
 alias routes="bundle exec rake routes"
 alias ta="tmux attach -t"
