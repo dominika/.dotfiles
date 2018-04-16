@@ -33,6 +33,8 @@ Plug 'benmills/vimux'
 Plug 'jgdavey/vim-turbux'
 
 Plug 'vim-ruby/vim-ruby'
+Plug 'danchoi/ri.vim'
+Plug 'hallison/vim-rdoc'
 Plug 'ecomba/vim-ruby-refactoring'
 Plug 'tmhedberg/matchit'
 Plug 'christoomey/vim-tmux-navigator'
@@ -225,6 +227,10 @@ command! -bang -nargs=* Ag
 nnoremap ,d obinding.pry_remote<ESC>
 nnoremap ,b oByebug.start_remote_debugging<ESC>
 let g:indentLine_setColors = 1
+map <Leader>rl :call VimuxRunCommand("clear; sp " . bufname("%") . ":" . line('.'))
+map <Leader>rb :call VimuxRunCommand("clear; sp " . bufname("%"))
+map <Leader>rc :call VimuxRunCommand("clear; check_current")
+
 let g:airline_theme='powerlineish'
 
 let g:signify_vcs_list = ['git']
