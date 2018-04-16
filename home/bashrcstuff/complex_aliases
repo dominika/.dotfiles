@@ -67,9 +67,13 @@ function glp() {
 }
 
 function gc() {
-  local pivotal_id
-  pivotal_id=$(git branch --no-color 2> /dev/null | sed -n 's/^\* .*\/[pt]*\([0-9]*\)\(.*\)/#\1/p')
-  git commit -m"$1" -m"[$pivotal_id]"
+  local jira_id
+  jira_id=$(git branch --no-color 2> /dev/null | sed -n 's/^\* .*\/\([a-zA-Z]*-[0-9]*\)-.*/\1/p')
+  if [ -z "$jira_id" ]; then
+    git commit -m"$1"
+  else
+    git commit -m"$1" -m"$jira_id"
+  fi
 }
 
 function gpo() {
