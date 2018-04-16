@@ -13,6 +13,25 @@ function sp {
   osascript -e "display notification \"$notification_message\" with title \"Tests finished\""
 }
 
+function _update_ {
+  echo 'Updating rubygems  -------------------------------------------------'
+  gem update --system
+  j admin
+  echo 'Updating bundler   -------------------------------------------------'
+  gem install bundler --no-document
+  # gem cleanup -V
+  echo 'Updating homebrew  -------------------------------------------------' 
+  if brew update ; then
+    echo 'Upgrading homebrew -------------------------------------------------'
+    brew upgrade --cleanup
+    brew cask upgrade
+  fi
+  brew doctor
+  echo 'Upgrading vim & plugins --------------------------------------------'
+  v +PlugUpgrade +PlugUpdate +qall
+  #https://github.com/Homebrew/homebrew-bundle
+}
+
 function use_local_gem {
   gsed -i "s/gem '$1',/gem '$1', path: '..\/$1' \#/g" Gemfile && bundle update $1 && generate_ctags $(basename $(pwd)) with_gems
 
