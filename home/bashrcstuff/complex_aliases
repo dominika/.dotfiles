@@ -16,7 +16,7 @@ function sp {
 function _update_ {
   echo 'Updating rubygems  -------------------------------------------------'
   gem update --system
-  j admin
+  chruby 2.4.1
   echo 'Updating bundler   -------------------------------------------------'
   gem install bundler --no-document
   # gem cleanup -V
