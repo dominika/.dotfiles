@@ -156,3 +156,7 @@ fshow_patch() {
     git stash show --color=always -p $stash_id | less -R
   done
 }
+
+function ke {
+  kubectl exec -ti -n "$1" $(kubectl get pods -n "$1" -l "app=$2" -o jsonpath="{.items[0].metadata.name}") $3
+}
