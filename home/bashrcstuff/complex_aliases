@@ -111,6 +111,14 @@ fgc() {
     git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 
+fgcr2() {
+  local branches branch
+  branches=$(git branch --all --sort=-committerdate | grep -v HEAD) &&
+    branch=$(echo "$branches" |
+                 fzf ${1:+-q$1} -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+                 git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
 fgcr() {
   local branches branch
   branches=$(git branch --all | grep -v HEAD) &&
