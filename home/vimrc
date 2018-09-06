@@ -185,8 +185,6 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%101v.\+/
 autocmd FileType man match NONE
 
 if exists("$MANPAGER")
@@ -207,7 +205,7 @@ highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Re
 "highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
 nnoremap <Leader>A :Ag 
 nnoremap  :GFiles
-let g:ackprg = 'ag --vimgrep'
+nnoremap  :Buffers
 "map <C-j> <C-W>j
 "map <C-k> <C-W>k
 "map <C-h> <C-W>h
@@ -230,6 +228,12 @@ let g:indentLine_setColors = 1
 map <Leader>rl :call VimuxRunCommand("clear; sp " . bufname("%") . ":" . line('.'))
 map <Leader>rb :call VimuxRunCommand("clear; sp " . bufname("%"))
 map <Leader>rc :call VimuxRunCommand("clear; check_current")
+
+set re=1 " for slow ruby syntax files
+
+let g:syntastic_ruby_checkers = ["mri", "rubocop"]
+let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_open = 0
 
 let g:airline_theme='powerlineish'
 
