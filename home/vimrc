@@ -1,6 +1,7 @@
 set encoding=utf-8
 set nocompatible
 filetype off
+set shell=/usr/local/bin/fish\ -li
 
 " whitespaces
 "set listchars=trail:•,nbsp:¬,tab:‹‹,precedes:«,extends:»
@@ -16,6 +17,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
+Plug 'chaoren/vim-wordmotion'
+"let g:wordmotion_prefix = ','
 
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
@@ -24,16 +27,20 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'git://github.com/Townk/vim-autoclose.git'
 "Plug 'vim-syntastic/syntastic'
+"let g:ale_completion_enabled = 1
+Plug 'dense-analysis/ale'
 Plug 'mhinz/vim-signify'
 Plug 'aklt/plantuml-syntax'
 
 " colorschemes
 Plug 'dracula/vim'
+Plug 'NLKNguyen/papercolor-theme'
 
 Plug 'kchmck/vim-coffee-script'
 Plug 'benmills/vimux'
 Plug 'jgdavey/vim-turbux'
 
+" ruby-related
 Plug 'vim-ruby/vim-ruby'
 Plug 'danchoi/ri.vim'
 Plug 'hallison/vim-rdoc'
@@ -42,10 +49,22 @@ Plug 'tmhedberg/matchit'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-rails'
 
+" python-related
+"Plug 'KangOl/vim-pudb'
+
 "Plug 'greyblake/vim-preview'
-Plug 'terryma/vim-instant-markdown'
+"Plug 'godlygeek/tabular'
+Plug 'ajorgensen/vim-markdown-toc', {'for': 'markdown'}
+Plug 'rhysd/vim-gfm-syntax', {'for': 'markdown'}
+Plug 'Scuilion/markdown-drawer', {'for': 'markdown'}
+let g:gfm_syntax_emoji_conceal=1
+autocmd BufRead,BufNewFile *.md setlocal spell
+"Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+"Plug 'JamshedVesuna/vim-markdown-preview'
+"Plug 'shime/vim-livedown'
 Plug 'lmeijvogel/vim-yaml-helper'
 Plug 'Yggdroot/indentLine'
+
 
 "Plug 'majutsushi/tagbar'
 call plug#end()
@@ -95,7 +114,7 @@ let NERDTreeHijackNetrw=1
 nnoremap <Leader>g :Gstatus5j
 nnoremap <Leader>w :Gwrite
 nnoremap <Leader>r :Gread
-nnoremap <Leader>u :GundoToggle
+"nnoremap <Leader>u :GundoToggle
 let g:gundo_right=1
 
 "let g:reload_on_write = 0
@@ -174,7 +193,7 @@ nnoremap <Leader>h :s/:\([^ ]*\)\(\s*\)=>/\1:/g
 "nnoremap <D-j> gT
 nnoremap k :tabprevious
 nnoremap j :tabnext
-nnoremap Q :q
+nnoremap Q :q!
 let ruby_space_errors=1
 let g:tex_flavor='latex'
 nnoremap § ;
@@ -219,17 +238,20 @@ if getcwd()=~$DEP_PROJECT_REG
 endif
 let g:tmux_navigator_disable_when_zoomed = 1
 let g:CoffeeAutoTagIncludeVars=1
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \                 <bang>0)
-nnoremap ,d obinding.pry_remote<ESC>
-nnoremap ,b oByebug.start_remote_debugging<ESC>
+nnoremap g] :call fzf#vim#tags(expand('<cword>'))
+nnoremap ,d obinding<ESC>
+nnoremap ,b obyebug<ESC>
 let g:indentLine_setColors = 1
-map <Leader>rl :call VimuxRunCommand("clear; sp " . bufname("%") . ":" . line('.'))
-map <Leader>rb :call VimuxRunCommand("clear; sp " . bufname("%"))
-map <Leader>rc :call VimuxRunCommand("clear; check_current")
+" run rpspec on line
+map <Leader>rl :call VimuxRunCommand("clear; env RAILS_ENV=test bundle exec rspec " . bufname("%") . ":" . line('.'))
+" run rpspec on buffer
+map <Leader>rb :call VimuxRunCommand("clear; env RAILS_ENV=test bundle exec rspec " . bufname("%"))
+" run rpspec on whole suite
+map <Leader>rs :call VimuxRunCommand("clear; env RAILS_ENV=test bundle exec rspec")
+map <Leader>rr :call VimuxRunCommand("clear; python3 contemplate_koans.py")
+"map <Leader>rc :call VimuxRunCommand("clear; check_current")
+map <Leader>rc :call VimuxRunCommand("clear; rubocop -R " . bufname("%"))
+map <Leader>u :call VimuxRunCommand("clear; plantuml -progress -failfast " . bufname("%") . " && open " . expand("%:p:r") . ".png")
 
 set re=1 " for slow ruby syntax files
 
@@ -249,3 +271,11 @@ highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
 highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
+
+autocmd VimEnter * command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>, '--smart-case --nogroup --ignore=log --ignore=public --ignore=tmp', <bang>0)
+
+autocmd Filetype gitcommit setlocal spell textwidth=72
+
+"nmap <silent> <C-m> <Plug>(ale_previous)
+"nmap <silent> <C-n> <Plug>(ale_next)
