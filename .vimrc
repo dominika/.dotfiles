@@ -11,7 +11,7 @@ Plug 'git://github.com/Townk/vim-autoclose.git'
 Plug 'tpope/vim-surround' " add/change/remove ' ( [ { ...
 Plug 'tpope/vim-unimpaired' " [] mappings
 "Plug 'sjl/gundo.vim' " visual undo
-"Plug 'scrooloose/nerdtree' " directory tree
+Plug 'scrooloose/nerdtree' " directory tree
 
 " +---- colorschemes
 Plug 'dracula/vim' " dark
@@ -60,10 +60,10 @@ call plug#end() " sets filetype plugin indent on and syntax enable
 set encoding=utf-8
 set shell=/usr/local/bin/fish\ -li
 
-"set background=dark
-"colorscheme dracula
-set background=light
-colorscheme PaperColor
+set background=dark
+colorscheme dracula
+"set background=light
+"colorscheme PaperColor
 
 " characters displayed as whitespaces: set list
 set showbreak=\\
